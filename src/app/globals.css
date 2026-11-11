@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --header-h: 76px;
+  }
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-frost font-sans text-abyss;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+  ::selection {
+    @apply bg-lagoon text-white;
+  }
+  :focus-visible {
+    outline: 2px solid theme("colors.lagoon.DEFAULT");
+    outline-offset: 3px;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display font-normal;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-site px-5 sm:px-8 lg:px-12;
+  }
+  .section {
+    @apply py-24 md:py-32 lg:py-40;
+  }
+  .kicker {
+    @apply text-sm font-semibold text-lagoon-deep;
+    letter-spacing: 0.01em;
+  }
+  .lead {
+    @apply text-lg leading-relaxed text-slate md:text-xl;
+  }
+  .rule {
+    @apply h-px w-full bg-abyss/10;
+  }
+  /* The tile mosaic borrowed from the logo's globe: used as a brand texture. */
+  .mosaic {
+    background-color: theme("colors.atlas.deep");
+    background-image:
+      linear-gradient(135deg, rgba(4, 169, 185, 0.55) 0 25%, transparent 25% 100%),
+      linear-gradient(45deg, rgba(255, 255, 255, 0.06) 0 50%, transparent 50% 100%);
+    background-size: 38px 38px, 76px 76px;
+  }
+  .link-underline {
+    background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+    transition: background-size 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .link-underline:hover,
+  .link-underline:focus-visible {
+    background-size: 100% 1px;
+  }
+  .blank-field {
+    @apply inline-block h-[1.1em] w-40 translate-y-[3px] border-b border-dashed border-current opacity-40;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { scrollbar-width: none; }
+}
+
+/* Lenis smooth scrolling */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Returning visitors skip the intro without a flash. */
+.tx-seen [data-intro] { display: none !important; }
